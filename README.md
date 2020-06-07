@@ -6,27 +6,45 @@
 این ماشینه سعی میکنه نمودار هم بکشه گاهی.
 
 <h2>راه انداختن‌اش</h2>
+
 برای استفاده ازش کتابخانه های `numpy` و `matplotlib` رو نصب کنید.  
 نکردید هم نکردید حالا چیزی‌ش نمی‌شه فقط نمودار نمی‌کشه.
 
 استفاده‌ش اینطوریه:  
+<div dir="ltr">
+
 `python pycalc.py "MATH EXPRESSION"`  
+</div>
+
 مثلا:  
-`python pycalc.py '3*sin(4*pi) + sqrt(6) + 1`  
+<div dir="ltr">
+
+`python pycalc.py '3*sin(4*pi) + sqrt(6) + 1'`  
+</div>
+
 که در خروجی پاسخ عبارت رو می‌نویسه  
 یا مثلا:  
-`python pycalc.py "y = sin(x) + 1`  
+<div dir="ltr">
+
+`python pycalc.py "y = sin(x) + 1"`  
+</div>
+
 که سعی می‌کنه یک نمودار ترسیم کنه.
 
 میتونید بعدش هم با یه `alias` براش یه میونبر درست کنید. مثل این:
+<div dir="ltr">
 
 `alias calc=/usr/bin/python Foo/Boo/pycalc.py`
+</div>
 
 همچنین میتونید این دستور رو به اون فایل rc شل اضافه کنید  
 مثلا من که zsh استفاده میکنم این رو به ته فایل `~/.zshrc` اضافه کرده‌م.
 
 که بعدش میشه خیلی ساده تر استفاده‌ش کرد. مثلا:  
-`calc 'sin(6 * pi) - 3`
+<div dir="ltr">
+
+`calc 'sin(6 * pi) - 3'`
+</div>
 
 
 <h2>توسعه</h2>
