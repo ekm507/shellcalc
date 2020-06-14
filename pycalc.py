@@ -44,7 +44,7 @@ if freeQ[:2] == 'y=':
     # execute provided command. so as an output y should be f(x)
     exec(freeQ)
     # create a plot for generated function array
-    plt.plot(y)
+    plt.plot(x, y)
     # show generated plot
     plt.show()
 
