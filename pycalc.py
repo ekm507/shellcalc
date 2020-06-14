@@ -11,10 +11,17 @@ question = sys.argv[1]
 
 # other arguments
 # get settings from shell
+# where plot x starts
 x_start = -10
+# where plot x ends
 x_end = 10
+# sampling period
 x_step = 0.1
+# if plot is to be drawn in a funny way
+xkcd = False
+# start getting options from shell
 other_args = sys.argv[2:]
+
 for i, arg in enumerate(other_args):
     if arg == 'from':
         x_start = float(other_args[i+1])
@@ -22,6 +29,8 @@ for i, arg in enumerate(other_args):
         x_end = float(other_args[i+1])
     elif arg == 'step':
         x_step = float(other_args[i+1])
+    elif arg == 'xkcd':
+        xkcd = True
 
 # remove all whitespaces from input.
 # this is done to check if this is in form of 'y=f(x)' or not
@@ -43,6 +52,9 @@ if freeQ[:2] == 'y=':
     x = arange(x_start, x_end, x_step)
     # execute provided command. so as an output y should be f(x)
     exec(freeQ)
+    # turn xkcd on if demanded
+    if xkcd == True:
+        plt.xkcd()
     # create a plot for generated function array
     plt.plot(x, y)
     # show generated plot
