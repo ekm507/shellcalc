@@ -12,9 +12,9 @@ question = sys.argv[1]
 # other arguments
 # get settings from shell
 # where plot x starts
-x_start = -10
+x_start = -10.0
 # where plot x ends
-x_end = 10
+x_end = 10.0
 # sampling period
 x_step = 0.1
 # if plot is to be drawn in a funny way
@@ -22,6 +22,8 @@ xkcd = False
 # start getting options from shell
 other_args = sys.argv[2:]
 
+ROUND = False
+FFT = False
 for i, arg in enumerate(other_args):
     if arg == 'from':
         x_start = float(other_args[i+1])
@@ -31,6 +33,10 @@ for i, arg in enumerate(other_args):
         x_step = float(other_args[i+1])
     elif arg == 'xkcd':
         xkcd = True
+    elif arg == 'round':
+        ROUND = True
+    elif arg == 'fft':
+        FFT = True
 
 # remove all whitespaces from input.
 # this is done to check if this is in form of 'y=f(x)' or not
@@ -55,6 +61,10 @@ if freeQ[:2] == 'y=':
     # turn xkcd on if demanded
     if xkcd == True:
         plt.xkcd()
+    if FFT:
+        y = fft.fftshift(abs(fft.fft(y)))
+        x = x / x_step / (x_end - x_start) * 2
+        print( x_step * (x_end - x_start) / 2)
     # create a plot for generated function array
     plt.plot(x, y)
     # show generated plot
@@ -70,5 +80,7 @@ else:
     # execute command. now output of the math equation should be stored in `answer` variable
     exec(command)
     # print the answer
+    if ROUND:
+        answer = round(answer)
     print(answer)
 
