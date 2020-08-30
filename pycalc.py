@@ -27,6 +27,8 @@ ROUND = False
 FFT = False
 INTEGRAL = False
 DERIV = False
+SHOW_ZERO = False
+
 for i, arg in enumerate(other_args):
     if arg == 'from':
         x_start = float(other_args[i+1])
@@ -44,6 +46,8 @@ for i, arg in enumerate(other_args):
         INTEGRAL = True
     elif arg in ['deriv', 'derivative', 'd']:
         DERIV = True
+    elif arg in ['zero',]:
+        SHOW_ZERO = True
 
 # remove all whitespaces from input.
 # this is done to check if this is in form of 'y=f(x)' or not
@@ -93,6 +97,11 @@ if freeQ[:2] == 'y=':
         print( x_step * (x_end - x_start) / 2)
     # create a plot for generated function array
     plt.plot(x, y)
+
+    if SHOW_ZERO == True:
+        zero_dim = zeros(int((x_end - x_start) / x_step))
+        plt.plot(x, zero_dim)
+
     # show generated plot
     plt.show()
 
