@@ -9,6 +9,7 @@ import sys
 # get input from shell as a string.
 question = sys.argv[1]
 
+
 # other arguments
 # get settings from shell
 # where plot x starts
@@ -24,6 +25,8 @@ other_args = sys.argv[2:]
 
 ROUND = False
 FFT = False
+INTEGRAL = False
+DERIV = False
 for i, arg in enumerate(other_args):
     if arg == 'from':
         x_start = float(other_args[i+1])
@@ -37,6 +40,10 @@ for i, arg in enumerate(other_args):
         ROUND = True
     elif arg == 'fft':
         FFT = True
+    elif arg in ['integral', 'int']:
+        INTEGRAL = True
+    elif arg in ['deriv', 'derivative', 'd']:
+        DERIV = True
 
 # remove all whitespaces from input.
 # this is done to check if this is in form of 'y=f(x)' or not
@@ -61,6 +68,25 @@ if freeQ[:2] == 'y=':
     # turn xkcd on if demanded
     if xkcd == True:
         plt.xkcd()
+    
+    if INTEGRAL == True:
+        q = []
+        k = 0
+        for i in y:
+            k += i
+            q.append(k)
+        y = q
+
+    if DERIV == True:
+        q = []
+        k = y[0]
+        for i in y[1:]:
+            q.append((k - i) / x_step)
+            k = i
+        
+        q.append(q[-1])
+        y = q
+
     if FFT:
         y = fft.fftshift(abs(fft.fft(y)))
         x = x / x_step / (x_end - x_start) * 2
