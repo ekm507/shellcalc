@@ -30,9 +30,6 @@ if len(sys.argv) > 1:
     other_args = sys.argv[2:]
 
     ROUND = False
-    FFT = False
-    INTEGRAL = False
-    DERIV = False
     SHOW_ZERO = False
 
     for i, arg in enumerate(other_args):
@@ -180,9 +177,6 @@ else:
         other_args = K[1:]
 
         ROUND = False
-        FFT = False
-        INTEGRAL = False
-        DERIV = False
         SHOW_ZERO = False
 
         for i, arg in enumerate(other_args):
@@ -196,12 +190,6 @@ else:
                 xkcd = True
             elif arg == 'round':
                 ROUND = True
-            elif arg == 'fft':
-                FFT = True
-            elif arg in ['integral', 'int']:
-                INTEGRAL = True
-            elif arg in ['deriv', 'derivative', 'd']:
-                DERIV = True
             elif arg in ['zero',]:
                 SHOW_ZERO = True
 
@@ -229,38 +217,52 @@ else:
             if xkcd == True:
                 plt.xkcd()
             
-            if INTEGRAL == True:
-                q = []
-                k = 0
-                for i in y:
-                    k += i
-                    q.append(k)
-                y = q
 
-            if DERIV == True:
-                q = []
-                k = y[0]
-                for i in y[1:]:
-                    q.append((k - i) / x_step)
-                    k = i
-                
-                q.append(q[-1])
-                y = q
+            for arg in other_args:
+                # if integral function should be calculated
+                if arg in ['int', 'integral',]:
+                        
+                    q = []
+                    k = 0
+                    for i in y:
+                        k += i
+                        q.append(k)
+                    y = q
 
-            if FFT:
-                y = fft.fftshift(abs(fft.fft(y)))
-                x = x / x_step / (x_end - x_start) * 2
-            
+                # if derivation should be calculated
+                elif arg in ['d', 'deriv',]:
+
+                    q = []
+                    k = y[0]
+                    for i in y[1:]:
+                        q.append((k - i) / x_step)
+                        k = i
+                    
+                    q.append(q[-1])
+                    y = q
+
+                # if a discrete fourier transform should be calculated
+                elif arg in ['fft',]:
+                        
+                    y = fft.fftshift(abs(fft.fft(y)))
+                    x = x / x_step / (x_end - x_start) * 2
+
+
+
             # create a plot for generated function array
             plt.plot(x, y)
 
+
+            # if zero line should be shown
             if SHOW_ZERO == True:
-                zero_dim = zeros(int((x_end - x_start) / x_step))
+                zero_dim = x * 0
+                # plot x axis
                 plt.plot(x, zero_dim)
+                # plot y axis
+                plt.plot(zero_dim, y)
 
             # show generated plot
             plt.show()
-
         # but if user is trying to get answer of a single line mathematical expression
         else:
             # import math functions
