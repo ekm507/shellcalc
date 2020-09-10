@@ -43,7 +43,7 @@ if len(sys.argv) > 1:
             xkcd = True
         elif arg == 'round':
             ROUND = True
-        elif arg in ['zero',]:
+        elif arg in ['zero', 'z',]:
             SHOW_ZERO = True
 
     # remove all whitespaces from input.
@@ -194,7 +194,7 @@ else:
                 xkcd = True
             elif arg == 'round':
                 ROUND = True
-            elif arg in ['zero',]:
+            elif arg in ['zero', 'z',]:
                 SHOW_ZERO = True
 
         # remove all whitespaces from input.
