@@ -6,6 +6,7 @@
 import sys
 
 
+# check if there are inputs provided from shell
 if len(sys.argv) > 1:
 
 
@@ -78,6 +79,7 @@ if len(sys.argv) > 1:
         if xkcd == True:
             plt.xkcd()
         
+        # if integral function should be calculated
         if INTEGRAL == True:
             q = []
             k = 0
@@ -86,6 +88,7 @@ if len(sys.argv) > 1:
                 q.append(k)
             y = q
 
+        # if derivation should be calculated
         if DERIV == True:
             q = []
             k = y[0]
@@ -96,6 +99,7 @@ if len(sys.argv) > 1:
             q.append(q[-1])
             y = q
 
+        # if a discrete fourier transform should be calculated
         if FFT:
             y = fft.fftshift(abs(fft.fft(y)))
             x = x / x_step / (x_end - x_start) * 2
@@ -103,9 +107,13 @@ if len(sys.argv) > 1:
         # create a plot for generated function array
         plt.plot(x, y)
 
+        # if zero line should be shown
         if SHOW_ZERO == True:
             zero_dim = zeros(int((x_end - x_start) / x_step))
+            # plot x axis
             plt.plot(x, zero_dim)
+            # plot y axis
+            plt.plot(zero_dim, y)
 
         # show generated plot
         plt.show()
@@ -125,12 +133,15 @@ if len(sys.argv) > 1:
         print(answer)
 
 
+# if no args are provided from shell, we will get them from stdin
 else:
 
-    print('shellcalc. type your command and press ENTER to execute so')
+    print('shellcalc. type your command and press ENTER to execute so. press crtl-D or type exit() to exit!')
 
+    # start getting commands
     while(True):
 
+        # check if there is any command provided
         try:
             K = input().split(' ')
 
@@ -142,11 +153,12 @@ else:
             else:
                 continue
 
-
+        # when pressing ctrl-C
         except KeyboardInterrupt:
             print('')
             continue
 
+        # when pressing ctrl-D
         except EOFError:
             exit(0)
 
