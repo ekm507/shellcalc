@@ -109,7 +109,7 @@ if len(sys.argv) > 1:
 
         # if zero line should be shown
         if SHOW_ZERO == True:
-            zero_dim = zeros(int((x_end - x_start) / x_step))
+            zero_dim = x * 0
             # plot x axis
             plt.plot(x, zero_dim)
             # plot y axis
