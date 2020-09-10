@@ -100,6 +100,10 @@ if len(sys.argv) > 1:
                 y = fft.fftshift(abs(fft.fft(y)))
                 x = x / x_step / (x_end - x_start) * 2
 
+            elif arg in ['ifft',]:
+                y = fft.ifft(fft.ifftshift(y))
+                x = x / 2 * (x_end - x_start) * x_step
+
 
 
         # create a plot for generated function array
@@ -246,6 +250,11 @@ else:
                         
                     y = fft.fftshift(abs(fft.fft(y)))
                     x = x / x_step / (x_end - x_start) * 2
+
+                elif arg in ['ifft',]:
+                    y = fft.ifft(fft.ifftshift(y))
+                    x = x / 2 * (x_end - x_start) * x_step
+
 
 
 
