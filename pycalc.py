@@ -42,7 +42,10 @@ if len(sys.argv) > 1:
                     if len(K) > 0:
                         # get input from shell as a string.
                         for number in K:
-                            summage += float(number)
+                            try:
+                                summage += float(number)
+                            except ValueError:
+                                continue
                         if len(number) < 1:
                             continue
                     else:
