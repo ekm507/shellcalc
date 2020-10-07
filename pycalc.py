@@ -15,6 +15,51 @@ if len(sys.argv) > 1:
     question = sys.argv[1]
 
 
+    # check if special functions are demanded
+    mode = 'plain'
+    if question[:2] == '--':
+        mode = question[2:]
+
+
+
+    # start getting options from shell
+    other_args = sys.argv[2:]
+
+
+    if mode == 'sum':
+        if len(other_args) > 0:
+            print(sum([float(number) for number in other_args]))
+            exit(0)
+        else:
+            summage = 0
+            # start getting numbers
+            while(True):
+
+                # check if there is any command provided
+                try:
+                    K = input().split(' ')
+
+                    if len(K) > 0:
+                        # get input from shell as a string.
+                        for number in K:
+                            summage += float(number)
+                        if len(number) < 1:
+                            continue
+                    else:
+                        continue
+
+                # when pressing ctrl-C
+                except KeyboardInterrupt:
+                    print('')
+                    continue
+
+                # when pressing ctrl-D
+                except EOFError:
+                    print(summage)
+                    exit(0)
+
+
+
     # other arguments
     # get settings from shell
     # where plot x starts
@@ -25,9 +70,6 @@ if len(sys.argv) > 1:
     x_step = 0.1
     # if plot is to be drawn in a funny way
     xkcd = False
-
-    # start getting options from shell
-    other_args = sys.argv[2:]
 
     ROUND = False
     SHOW_ZERO = False
